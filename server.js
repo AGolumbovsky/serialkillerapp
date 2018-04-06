@@ -1,36 +1,14 @@
-/* const SerialPort = require('serialport');
-
-console.log("start of program")
-
-const portName = 'COM2'
-console.log(portName);
-
-var myPort = new SerialPort(portName, 9600);
-
-myPort.on('open', (myPort) => {
-    console.log("something is open")
-});
-
-myPort.write("I have no idea wha't going on...")
-
-// list serial ports:
-SerialPort.list(function (err, ports) {
- ports.forEach(function(port) {
-   console.log("the port com name is", port.comName);
- });
-});
-
-console.log("end of program") */
-
-
 
 const SerialPort = require('serialport');
 
+
 const port = new SerialPort('COM3', (err) => {
 	
-	if(err) console.log("Error:", err.message);
+	if(err) console.log("Error creating new port:", err.message);
 	
 });
+
+var ports = ["at first index"]; // secretaty not sure
 
 // console.log("the port is:", port);
 
@@ -38,19 +16,24 @@ port.on('open', () => {
 	console.log("port is open for business");
 });
 
-port.write("hoopla", (err) => {
-	
-	if(err) console.log("Error while writing:", err.message);
-	console.log("message written successfully");
+// start of weird code that may (most likely will) cause problems and shit
+// *** *** *** 
+// *** *** 
+SerialPort.list(function (err, ports) {
+
+	console.log("look, i'm logging something inside SerialPort.list()")
+
+	ports.forEach(function(port) {
+	  console.log("the port com name is", port.comName);
+	});
 });
 
+// *** *** *** 
+// *** *** *** ***
+// end of weird code that might have(most likely did) caused problems and shit
+
+port.write("hoopla", (err) => {
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	if(err) console.log("Errr, there was error:", err.message);
+	console.log("message written successfully");
+});
