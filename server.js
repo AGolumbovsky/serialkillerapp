@@ -6,6 +6,8 @@ const SerialPort = require('serialport');
 const port = new SerialPort('COM3', (err) => {
 	
 	if(err) console.log("Error creating new port:", err.message);
+
+	else console.log("Great success!!! Port created");
 	
 });
 
