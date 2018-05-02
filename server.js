@@ -24,6 +24,8 @@ port.on('open', () => {
 // *** *** 
 SerialPort.list(function (err, ports) {
 
+	if(err) console.log("some shit happened:", err.message);
+
 	console.log("look, i'm logging something inside SerialPort.list()")
 
 	ports.forEach(function(port) {
